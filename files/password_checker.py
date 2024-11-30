@@ -2,7 +2,7 @@ import  requests
 import hashlib
 class Passwords:
     @staticmethod
-    def request_api_data(checker) -> requests:
+    def request_api_data(checker: str) -> requests:
         url: str = 'https://api.pwnedpasswords.com/range/' + checker
         res: requests = requests.get(url)
         if res.status_code != 200:
@@ -11,8 +11,9 @@ class Passwords:
         return res
 
     @staticmethod
-    def hash_password_for_api(password) -> tuple:
-        sha1_passowrd = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
+    def hash_password_for_api(password: str) -> tuple:
+        tail: str = ''
+        sha1_passowrd: str = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
         sha1_passowrd, tail = sha1_passowrd[:5], sha1_passowrd[5:]
         return sha1_passowrd, tail
     
