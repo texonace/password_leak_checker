@@ -24,3 +24,9 @@ class Passwords:
                 return leak_count
         return 0
             
+if __name__ == '__main__':    
+    password = input('Enter Your Password: ')
+    hash = Passwords.hash_password_for_api(password)
+    response = Passwords.request_api_data(hash[0])
+    num = Passwords.check_no_of_leaks(response, hash[1])
+    print(f'Your Password: {password} has been compromised: {num} times')
